@@ -10,22 +10,9 @@ st.write("Choose the fruis you want in your custom Smoothie!")
 name_on_order = st.text_input('Name of Smoothie')
 st.write('The current movie title is', name_on_order)
 
-
-
-##
-
 cnx = st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
-
-##
-
-
-
-#cnx = st.connection('snowflake')
-#session = cnx.session()
-
-#my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:'
@@ -55,3 +42,9 @@ if ingredients_list:
         session.sql(my_insert_stmt).collect()
             
         st.success('Your Smoothie is ordered!', icon="✅")
+
+
+# New section
+import requests
+smoothiefroot_response = request.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response=
